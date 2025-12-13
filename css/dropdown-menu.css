@@ -1,0 +1,48 @@
+[data-dropdown] {
+  position: relative; /*para o position absolute do dropdown-menu ficar em relação ao li e não à página*/
+}
+
+[data-dropdown] .dropdown-menu {
+  display: none;
+}
+
+[data-dropdown]:hover .dropdown-menu,
+[data-dropdown].active .dropdown-menu {
+  display: block;
+  animation: show-up .3s forwards;
+}
+
+@keyframes show-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0,30px,0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+}
+
+.dropdown-menu {
+  position: absolute; 
+  top: 38px; /*  medida para não ficar um 'gap' entre o item do menu e seu submenu, o que faz com que o submenu 'suma' quando passamos o mouse! */
+  background: #E54;
+  border: 2px solid #333;
+  z-index: 200; /* para ficar por cima de tudo. poderia ser acima de 1, coloca 200 pq se tiver outro elemento com z index.. */
+}
+
+.dropdown-menu::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -10px;
+  width: 0px;
+  height: 0px;
+  border-bottom: 10px solid #E54;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent; /*estratégia para criar o triângulo - bordas*/
+}
+
+.dropdown-menu li a:hover {
+  color: white;
+}
