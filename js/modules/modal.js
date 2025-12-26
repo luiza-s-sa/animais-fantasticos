@@ -1,25 +1,42 @@
-export default function initModal() {
-  const botaoAbrir = document.querySelector('[data-modal="abrir"]'); // onde vamos clicar pra abrir
-  const botaoFechar = document.querySelector('[data-modal="fechar"]'); // onde vamos clicar para fechar
-  const containerModal = document.querySelector('[data-modal="container"]'); // onde vamos adicionar a classe de ativo
-
-  function toggleModal(event) {
-    event.preventDefault();
-    containerModal.classList.toggle("ativo");
+export default class Modal {
+  constructor(botaoAbrir, botaoFechar, containerModal) {
+    this.botaoAbrir = document.querySelector(botaoAbrir);
+    this.botaoFechar = document.querySelector(botaoFechar);
+    this.containerModal = document.querySelector(containerModal);
+    // bind this ao callback para fazer referência ao objeto da classe
+    this.eventToggleModal = this.eventToggleModal.bind(this);
+    this.cliqueForaModal = this.cliqueForaModal.bind(this);
   }
-  function cliqueForaModal(event) {
-    if (event.target === containerModal) {
-      // poderia escrever event.target === this também. o containerModal é TODA TELA ao redor do modal em si! é aquele fundo com opacidade que aparece, quando clicar naquele fundo é pra fechar, quando clicar dentro do modal não é pra fazer nada!)
-      toggleModal(event); // passamos o event para o prevent default funcionar, senão dá erro! (é pq na função toggleModal passamos um 'event.preventDefault()'. e se não passamos o event aqui ele não encontra o event para adicionar no preventDefault e dá erro)
+
+  // abre ou fecha o modal
+  toggleModal() {
+    this.containerModal.classList.toggle("ativo");
+  }
+
+  // adiciona o evento de toggle ao modal
+  eventToggleModal(event) {
+    event.preventDefault();
+    this.toggleModal();
+  }
+
+  // fecha o modal ao clicar do lado de fora
+  cliqueForaModal(event) {
+    if (event.target === this.containerModal) {
+      this.toggleModal();
     }
   }
 
-  if (botaoAbrir && botaoFechar && containerModal) {
-    botaoAbrir.addEventListener("click", toggleModal);
-    botaoFechar.addEventListener("click", toggleModal);
-    containerModal.addEventListener("click", cliqueForaModal);
+  // adiciona os eventos aos elementos do modal
+  addModalEvents() {
+    this.botaoAbrir.addEventListener("click", this.eventToggleModal);
+    this.botaoFechar.addEventListener("click", this.eventToggleModal);
+    this.containerModal.addEventListener("click", this.cliqueForaModal);
+  }
+  init() {
+    if (this.botaoAbrir && this.botaoFechar && this.containerModal) {
+      this.addModalEvents();
+    }
+    return this;
   }
 }
 
-// primeiro temos que pensar em selecionr todos os elementos envolvidos na ação de ativar/desativar o modal: botão de abrir (login), botão de fechar, e o modal em si.
-// últimos passos: verificações! SEMPRE VERIFICAR SE OS SELETORES EXISTEM NA PÁGINA, para não dar erro.
