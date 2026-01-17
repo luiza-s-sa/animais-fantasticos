@@ -8,7 +8,7 @@ export default class ScrollAnima {
   // Pega a distância de cada item
   // em relação ao topo do site
   getDistance() {
-    this.distante = [...this.sections].map((section) => {
+    this.distance = [...this.sections].map((section) => {
       const offset = section.offsetTop;
       return {
         element: section,
@@ -20,7 +20,7 @@ export default class ScrollAnima {
   // Verifica a distância em cada objeto
   // em relação ao scroll do site
   checkDistance() {
-    this.distante.forEach((item) => {
+    this.distance.forEach((item) => {
       if (window.pageYOffset > item.offset) {
         item.element.classList.add("ativo");
       } else if (item.element.classList.contains("ativo")) {
