@@ -1,6 +1,5 @@
 import outsideClick from "./outsideclick.js";
 
-// '[data-dropdown]'
 export default class DropdownMenu {
   constructor(dropdownMenus, events) {
     this.dropdownMenus = document.querySelectorAll(dropdownMenus);
