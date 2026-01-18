@@ -33,7 +33,7 @@ export default class DropdownMenu {
     });
   }
 
-  initFuncionamento() {
+  init() {
     if (this.dropdownMenus.length) {
       this.addDropdownMenusEvent();
     }
