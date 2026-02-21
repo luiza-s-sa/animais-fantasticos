@@ -1,13 +1,14 @@
 {
   "name": "animais-fantasticos",
   "version": "1.0.0",
-  "scripts": {
-    "dev": "webpack --mode development --watch",
-    "build": "webpack --mode production"
-  },
-  "keywords": [],
-  "license": "ISC",
   "description": "",
+  "main": "index.html",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch"
+  },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.28.5",
     "@babel/plugin-transform-runtime": "^7.28.5",
