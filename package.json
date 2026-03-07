@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "build": "webpack --mode production",
-    "dev": "webpack --mode development --watch"
+    "dev": "npx esbuild js/script.js --watch --bundle --outfile=main.js",
+    "build": "npx esbuild js/script.js --minify --bundle --target=es2017 --platform=browser --outfile=main.js"
   },
   "author": "",
   "license": "ISC",
